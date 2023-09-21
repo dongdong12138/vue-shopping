@@ -1,0 +1,7 @@
+@mixin layout {
+  .page {
+    height: 100vh;
+    display: flex; flex-direction: column;
+    > .wrapper { flex: 1; }
+  }
+}
