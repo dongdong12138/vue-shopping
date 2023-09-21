@@ -4,7 +4,9 @@ import Docker from '@/components/Docker.vue'
 
 <template>
   <div class="page">
-    <div class="wrapper"></div>
+    <div class="home wrapper">
+      home
+    </div>
     <Docker />
   </div>
 </template>
@@ -13,4 +15,8 @@ import Docker from '@/components/Docker.vue'
 @import "../../style/mixins.scss";
 
 @include layout;
+
+.home {
+  border: 1px solid red;
+}
 </style>
