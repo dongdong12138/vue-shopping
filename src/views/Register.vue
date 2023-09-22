@@ -1,24 +1,42 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref, toRefs } from 'vue'
+import { useRouter } from 'vue-router'
 import ShInput from '@/components/ShInput.vue'
 import ShButton from '@/components/ShButton.vue'
+import ShToast from '@/components/ShToast.vue'
 
-const data = reactive({ tel: '', password: '', ensurePassword: '' })
+const router = useRouter()
+const shToast = ref()
+const data = reactive({ username: '', password: '', ensurePassword: '' })
+const { username, password, ensurePassword } = toRefs(data)
 
 const handleRegister = () => {
-  console.log('注册')
+  if (!username.value) return shToast.value.showToast('请输入用户名')
+  if (!password.value) return shToast.value.showToast('请输入密码')
+  if (!ensurePassword.value) return shToast.value.showToast('请输入确认密码')
+  if (password.value !== ensurePassword.value) {
+    shToast.value.showToast('两次密码输入不一致，请重新输入')
+    ensurePassword.value = ''
+    return
+  }
+  goToLogin()
+}
+
+const goToLogin = () => {
+  router.push('/login')
 }
 </script>
 
 <template>
   <div class="register">
     <img src="http://www.dell-lee.com/imgs/vue3/user.png" alt="avatar" class="register_avatar" />
-    <ShInput v-model="data.tel" placeholder="请输入用户名" class="register_input" />
-    <ShInput v-model="data.password" placeholder="请输入密码" class="register_input" />
-    <ShInput v-model="data.ensurePassword" placeholder="确认密码" class="register_input" />
-    <ShButton @click="handleRegister" class="register_button">注 册</ShButton>
-    <span class="register_login">已有帐号去登录</span>
+    <ShInput v-model="username" placeholder="请输入用户名" class="register_input" />
+    <ShInput v-model="password" type="password" placeholder="请输入密码" class="register_input" />
+    <ShInput v-model="ensurePassword" type="password" placeholder="确认密码" class="register_input" />
+    <ShButton class="register_button" @click="handleRegister">注 册</ShButton>
+    <span class="register_login" @click="goToLogin">已有帐号去登录</span>
   </div>
+  <ShToast ref="shToast" />
 </template>
 
 <style scoped lang="scss">
