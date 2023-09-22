@@ -1,24 +1,34 @@
 <script setup>
 import { reactive, ref, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 import ShInput from '@/components/ShInput.vue'
 import ShButton from '@/components/ShButton.vue'
 import ShToast from '@/components/ShToast.vue'
 
 const router = useRouter()
+const store = useStore()
 const shToast = ref()
 const data = reactive({ username: '', password: '', ensurePassword: '' })
 const { username, password, ensurePassword } = toRefs(data)
 
+const showToast = message => {
+  shToast.value.showToast(message)
+}
+
+/** 注册 */
 const handleRegister = () => {
-  if (!username.value) return shToast.value.showToast('请输入用户名')
-  if (!password.value) return shToast.value.showToast('请输入密码')
-  if (!ensurePassword.value) return shToast.value.showToast('请输入确认密码')
+  if (!username.value) return showToast('请输入用户名')
+  if (!password.value) return showToast('请输入密码')
+  if (!ensurePassword.value) return showToast('请输入确认密码')
   if (password.value !== ensurePassword.value) {
-    shToast.value.showToast('两次密码输入不一致，请重新输入')
+    showToast('两次密码输入不一致，请重新输入')
     ensurePassword.value = ''
     return
   }
+  const userInfo = { username: username.value, password: password.value }
+  if (userInfo.username === store.state.userInfo.username) return showToast('该用户名已存在')
+  store.dispatch('saveUserInfo', userInfo)
   goToLogin()
 }
 
