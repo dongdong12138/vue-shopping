@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref, toRefs } from 'vue'
+import { defineProps, ref, toRefs, watchEffect } from 'vue'
 
 const props = defineProps({
   modelValue: { type: String, required: true },
@@ -9,7 +9,10 @@ const props = defineProps({
 const { modelValue, type, placeholder } = toRefs(props)
 
 const inputValue = ref('')
-inputValue.value = modelValue.value
+
+watchEffect(() => {
+  inputValue.value = modelValue.value
+})
 </script>
 
 <template>
