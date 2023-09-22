@@ -16,11 +16,13 @@ const showToast = message => {
   shToast.value.showToast(message)
 }
 
+/** 登录 */
 const handleLogin = () => {
   if (!data.username) return showToast('请输入用户名')
   if (!data.password) return showToast('请输入密码')
   if (data.username !== userInfo.username) return showToast('该用户名不存在')
   if (data.password !== userInfo.password) return showToast('密码输入错误')
+
   router.push('/')
 }
 
