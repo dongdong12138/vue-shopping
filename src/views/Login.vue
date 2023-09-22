@@ -29,7 +29,7 @@ const goToRegister = () => {
 }
 
 const handleForget = () => {
-  showToast(`当前账号的密码为：${userInfo.password}`)
+  userInfo.password && showToast(`当前账号的密码为：${userInfo.password}`)
 }
 </script>
 

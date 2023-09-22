@@ -19,6 +19,7 @@ const showToast = message => {
 /** 注册 */
 const handleRegister = () => {
   if (!username.value) return showToast('请输入用户名')
+  if (username.value === store.state.userInfo.username) return showToast('该用户名已存在')
   if (!password.value) return showToast('请输入密码')
   if (!ensurePassword.value) return showToast('请输入确认密码')
   if (password.value !== ensurePassword.value) {
@@ -27,7 +28,6 @@ const handleRegister = () => {
     return
   }
   const userInfo = { username: username.value, password: password.value }
-  if (userInfo.username === store.state.userInfo.username) return showToast('该用户名已存在')
   store.dispatch('saveUserInfo', userInfo)
   goToLogin()
 }
