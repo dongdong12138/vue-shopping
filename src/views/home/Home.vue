@@ -1,11 +1,12 @@
 <script setup>
 import Docker from '@/components/Docker.vue'
+import StaticPart from './StaticPart.vue'
 </script>
 
 <template>
   <div class="page">
     <div class="home wrapper">
-      home
+      <StaticPart />
     </div>
     <Docker />
   </div>
@@ -18,5 +19,6 @@ import Docker from '@/components/Docker.vue'
 
 .home {
   border: 1px solid red;
+  padding: 0 .18rem .1rem .18rem;
 }
 </style>
