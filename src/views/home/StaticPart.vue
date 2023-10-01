@@ -1,5 +1,8 @@
 <script setup>
+import { useRouter } from 'vue-router'
 import ShInput from '@/components/ShInput.vue'
+
+const router = useRouter()
 
 const iconsList = [
   { imgName: '超市', desc: '超市便利' }, { imgName: '菜市场', desc: '菜市场' }, { imgName: '水果店', desc: '水果店' },
@@ -9,7 +12,7 @@ const iconsList = [
 ]
 
 const handleSearch = () => {
-  // TODO: 跳转到搜索页面
+  router.push('/search')
 }
 </script>
 
@@ -63,7 +66,7 @@ const handleSearch = () => {
 }
 
 .banner_img {
-  margin-top: 12px;
+  margin-top: .12rem;
   display: block;
 }
 

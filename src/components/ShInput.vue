@@ -1,6 +1,7 @@
 <script setup>
-import { defineProps, ref, toRefs, watchEffect } from 'vue'
+import { defineProps, defineEmits, ref, toRefs, watchEffect } from 'vue'
 
+const emits = defineEmits(['update:modelValue', 'change'])
 const props = defineProps({
   modelValue: { type: String },
   size: { type: String, default: 'big' },
@@ -24,7 +25,8 @@ watchEffect(() => {
     <input
       v-model="inputValue"
       :type="type" :placeholder="placeholder" :disabled="disabled"
-      @input="$emit('update:modelValue', inputValue)"
+      @input="emits('update:modelValue', inputValue)"
+      @change="emits('change', inputValue)"
     >
   </div>
 </template>
