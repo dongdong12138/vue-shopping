@@ -2,6 +2,7 @@
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import ShInput from '@/components/ShInput.vue'
+import { useHotListEffect } from './hook'
 
 const router = useRouter()
 
@@ -33,6 +34,9 @@ const goToSearchList = value => {
   // TODO：跳转到搜索列表页
   console.log('goToSearchList value:', value)
 }
+
+const { hotList, getHotList } = useHotListEffect()
+getHotList()
 </script>
 
 <template>
@@ -56,8 +60,7 @@ const goToSearchList = value => {
     <div class="search_box">
       <h4 class="search_box_title">热门搜索</h4>
       <ul class="search_box_list">
-        <li>尖椒肉丝</li>
-        <li>山姆会员商店</li>
+        <li v-for="item in hotList" :key="item" @click="goToSearchList(item)">{{ item }}</li>
       </ul>
     </div>
 
