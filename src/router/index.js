@@ -54,8 +54,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "search" */ '@/views/search/Search.vue')
   },
   {
+    // 搜索列表
+    path: '/searchList',
+    name: 'searchList',
+    component: () => import(/* webpackChunkName: "searchList" */ '@/views/searchList/SearchList.vue')
+  },
+  {
     // 店铺
-    path: '/shop',
+    path: '/shop/:id',
     name: 'shop',
     component: () => import(/* webpackChunkName: "shop" */ '@/views/Shop.vue')
   }

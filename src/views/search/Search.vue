@@ -18,7 +18,7 @@ const handleSearchChange = value => {
     data.history.push(value)
     localStorage.setItem('history', JSON.stringify(data.history))
   }
-  // TODO：跳转到搜索列表页
+  router.push(`/searchList?keyword=${data.searchValue}`)
 }
 
 const handleCancel = () => {
@@ -31,8 +31,7 @@ const handleClearHistory = () => {
 }
 
 const goToSearchList = value => {
-  // TODO：跳转到搜索列表页
-  console.log('goToSearchList value:', value)
+  router.push(`/searchList?keyword=${value}`)
 }
 
 const { hotList, getHotList } = useHotListEffect()
@@ -69,7 +68,6 @@ getHotList()
 
 <style scoped lang="scss">
 .search {
-  border: 1px solid red;
   padding: 0 .18rem;
 }
 
@@ -87,7 +85,6 @@ getHotList()
 }
 
 .search_box {
-  border: 1px solid red;
   margin-top: .24rem;
 
   &_title {
